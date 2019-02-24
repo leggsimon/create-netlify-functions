@@ -2,6 +2,7 @@
 'use strict';
 
 const argv = require('yargs').argv;
+const fse = require('fs-extra');
 
 const logRed = (...args) => console.log('\x1b[31m', ...args, '\x1b[0m');
 
@@ -12,4 +13,13 @@ if (!targetDirectory) {
 	process.exit(1);
 }
 
+fse.pathExists(targetDirectory)
+	.then(exists => {
+		if (exists) {
+			logRed(
+				`${targetDirectory} already exists, please choose another destination`,
+			);
+			process.exit(1);
+		}
+	})
 process.exit(0);
