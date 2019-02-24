@@ -4,7 +4,7 @@
 	"description": "Scaffolds a project with a ready to deploy Netlify function",
 	"bin": "bin/create.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 0"
 	},
 	"keywords": [],
 	"author": "",
@@ -12,5 +12,8 @@
 	"dependencies": {
 		"fs-extra": "^7.0.1",
 		"yargs": "^13.2.1"
+	},
+	"devDependencies": {
+		"np": "^4.0.2"
 	}
 }
