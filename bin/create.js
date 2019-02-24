@@ -20,6 +20,15 @@ fse.pathExists(targetDirectory)
 				`${targetDirectory} already exists, please choose another destination`,
 			);
 			process.exit(1);
+		} else {
+			return fse.mkdirp(targetDirectory);
 		}
 	})
+	.then(() => {
+		console.log(`created ${targetDirectory}`);
 process.exit(0);
+	})
+	.catch(error => {
+		logRed(`Error creating ${targetDirectory}`, error);
+		process.exit(1);
+	});
