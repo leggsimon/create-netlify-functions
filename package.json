@@ -1,6 +1,6 @@
 {
 	"name": "create-netlify-functions",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Scaffolds a project with a ready to deploy Netlify function",
 	"bin": "bin/create.js",
 	"scripts": {
