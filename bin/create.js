@@ -26,7 +26,10 @@ fse.pathExists(targetDirectory)
 	})
 	.then(() => {
 		console.log(`created ${targetDirectory}`);
-process.exit(0);
+		return fse.copy(`${__dirname}/../examples/default`, targetDirectory);
+	})
+	.then(() => {
+		process.exit(0);
 	})
 	.catch(error => {
 		logRed(`Error creating ${targetDirectory}`, error);
