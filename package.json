@@ -1,6 +1,6 @@
 {
 	"name": "create-netlify-functions",
-	"version": "0.0.3",
+	"version": "0.1.0",
 	"description": "Scaffolds a project with a ready to deploy Netlify function",
 	"author": "Simon Legg",
 	"keywords": [
