@@ -3,6 +3,8 @@
 
 const argv = require('yargs').argv;
 const fse = require('fs-extra');
+const path = require('path');
+const { generatePackageJson, generateReadme } = require('../lib/generateFiles');
 
 const logRed = (...args) => console.log('\x1b[31m', ...args, '\x1b[0m');
 const logGreen = (...args) => console.log('\x1b[32m', '✓', ...args, '\x1b[0m');
@@ -39,15 +41,33 @@ async function copyFilesToTarget(target) {
 		const exampleDirectory = `${__dirname}/../examples/default`;
 		await fse.copy(exampleDirectory, targetDirectory);
 		logGreen(`Successfully copied files to ${target}`);
-		return;
+		return target;
 	} catch (error) {
 		throw new Error(`An error occured when copying the files.`);
+	}
+}
+
+async function writeFiles(target) {
+	const basename = path.basename(target);
+	const packageJson = generatePackageJson(basename);
+	const readme = generateReadme(basename);
+
+	try {
+		await Promise.all([
+			fse.outputJSON(`${target}/package.json`, packageJson, {
+				spaces: '\t',
+			}),
+			fse.outputFile(`${target}/README.md`, readme),
+		]);
+	} catch (error) {
+		throw new Error(`An error occured generating files.`);
 	}
 }
 
 checkDirectory(targetDirectory)
 	.then(createTargetDirectory)
 	.then(copyFilesToTarget)
+	.then(writeFiles)
 	.then(() => process.exit(0))
 	.catch(error => {
 		logRed('\n', error, '\n');
