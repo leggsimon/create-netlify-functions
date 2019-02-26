@@ -18,6 +18,12 @@ or
 npx create-netlify-functions <directory-name>
 ```
 
+or
+
+```sh
+yarn create netlify-functions <directory-name>
+```
+
 ## What does it do?
 
 Currently it creates a single “hello world” lambda in a directory. It sets up the Netlify config so that you could publish it immediately and it should Just Work™.
